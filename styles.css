@@ -1,0 +1,16 @@
+/* style.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+#map {
+  height: 90vh; /* take almost full screen */
+  width: 100%;
+}
