@@ -7,21 +7,23 @@ var map = L.map('map', {
   timeDimensionControl: true
 });
 
-// Random color generator for countries
+// Random color generator
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-// Load countries GeoJSON (modern borders)
-fetch("countries.geo.json") // or GitHub raw URL if not local
+// Use a reliable GeoJSON URL (example: Natural Earth via GitHub)
+const geoJsonUrl = "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";
+
+fetch(geoJsonUrl)
   .then(res => {
-    if (!res.ok) throw new Error("GeoJSON fetch failed");
+    if (!res.ok) throw new Error(`GeoJSON fetch failed: ${res.status}`);
     return res.json();
   })
   .then(data => {
     var countryLayer = L.geoJSON(data, {
       style: () => ({
-        color: "white",          // border color
+        color: "white",
         weight: 1,
         fillColor: getRandomColor(),
         fillOpacity: 1
@@ -29,15 +31,6 @@ fetch("countries.geo.json") // or GitHub raw URL if not local
       onEachFeature: (feature, layer) => {
         layer.bindTooltip(feature.properties.name);
       }
-    });
-
-    // Wrap in TimeDimension (slider works, placeholder for timeline)
-    var tdLayer = L.timeDimension.layer.geoJson(countryLayer, {
-      updateTimeDimension: true,
-      addlastPoint: false,
-      duration: 'P1Y'
-    });
-
-    tdLayer.addTo(map);
+    }).addTo(map); // Add directly to map (no TimeDimension if not needed)
   })
-  .catch(err => console.error("Error loading GeoJSON:", err));
+  .catch(err => console.error("Error:", err));
