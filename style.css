@@ -3,8 +3,48 @@ html, body, #map {
   padding: 0;
   height: 100%;
   width: 100%;
+  font-family: 'Inter', sans-serif; /* Modern font */
 }
 
 #map {
-  background: #001a33; /* dark ocean background */
+  background: #001a33; /* Dark ocean background */
+}
+
+/* TimeDimension slider styling */
+.leaflet-timedimension-control {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  padding: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaflet-timedimension-slider {
+  width: 200px !important;
+  margin: 0 auto;
+}
+
+.leaflet-timedimension-timeinput {
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* Country labels (always visible) */
+.leaflet-tooltip {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  pointer-events: none; /* Allows clicks to pass through */
+  opacity: 0.9;
 }
