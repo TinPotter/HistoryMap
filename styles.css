@@ -1,11 +1,10 @@
-/* remove default margins so map fills full viewport */
-body, html {
+html, body, #map {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 
 #map {
-  width: 100%;
-  height: 100%;
+  background: #001a33; /* dark sea color */
 }
