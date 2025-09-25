@@ -2,56 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Historical Timeline Map</title>
+  <title>Ancient World Timeline</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <!-- Leaflet TimeDimension CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.control.min.css" />
-  <!-- Custom CSS for modern labels -->
-  <style>
-    html, body, #map { margin: 0; padding: 0; height: 100%; width: 100%; }
-    #map { background: #0a1a2a; } /* Dark ocean blue */
-
-    /* Modern label styling */
-    .country-label {
-      font-family: 'Segoe UI', sans-serif;
-      font-weight: 500;
-      font-size: 10px;
-      text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Minimalist timeline slider */
-    .leaflet-timedimension-control {
-      background: rgba(20, 20, 20, 0.8);
-      border-radius: 4px;
-      border: 1px solid #333;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    .leaflet-timedimension-slider {
-      background: #333;
-      border-radius: 2px;
-    }
-    .leaflet-timedimension-slider-handle {
-      background: #fff;
-      border: 2px solid #555;
-      width: 12px;
-      height: 12px;
-      top: -5px;
-    }
-    .leaflet-timedimension-timeinput input {
-      background: #222;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 4px;
-    }
-  </style>
+  <!-- Google Fonts (Modern, clean) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="map"></div>
@@ -59,7 +19,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Leaflet TimeDimension JS -->
   <script src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.min.js"></script>
-  <!-- ISO8601 library (required for TimeDimension) -->
+  <!-- ISO8601 (required for TimeDimension) -->
   <script src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.3/iso8601.min.js"></script>
   <!-- Your script -->
   <script src="script.js"></script>
