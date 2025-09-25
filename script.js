@@ -1,18 +1,18 @@
-// Initialize map WITH TimeDimension (but don't use it yet)
+// Initialize the map (without TimeDimension)
 var map = L.map('map', {
   center: [20, 0],
   zoom: 2,
-  timeDimension: true,
-  timeDimensionControl: true,
-  timeDimensionOptions: {
-    timeInterval: "2000-01-01/2025-01-01", // Placeholder interval
-    period: "P1Y" // Default period (won't affect static data)
-  }
+  scrollWheelZoom: true
 });
 
-// Load GeoJSON normally (no TimeDimension layer)
-fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
-  .then(res => res.json())
+// Load a public GeoJSON (e.g., world countries)
+const geoJsonUrl = "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";
+
+fetch(geoJsonUrl)
+  .then(res => {
+    if (!res.ok) throw new Error(`Failed to load GeoJSON: ${res.status}`);
+    return res.json();
+  })
   .then(data => {
     L.geoJSON(data, {
       style: () => ({
@@ -25,4 +25,5 @@ fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.g
         layer.bindTooltip(feature.properties.name);
       }
     }).addTo(map);
-  });
+  })
+  .catch(err => console.error("Error:", err));
