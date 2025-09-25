@@ -2,55 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Minimal Dark Map</title>
+  <title>Historical Timeline Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
+  <link 
+    rel="stylesheet" 
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     crossorigin=""
   />
-  <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
-    }
-    #map {
-      height: 100%;
-      width: 100%;
-      background-color: #001a33; /* dark blue ocean */
-    }
-  </style>
+
+  <!-- Leaflet TimeDimension CSS -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.control.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="map"></div>
 
   <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
-  <script>
-    // Create empty map (no base tiles)
-    var map = L.map('map', {
-      center: [20, 0],
-      zoom: 2,
-      scrollWheelZoom: true
-    });
+  <!-- Leaflet TimeDimension -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.min.js"></script>
 
-    // Load world countries GeoJSON (Natural Earth dataset via CDN)
-    fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
-      .then(res => res.json())
-      .then(data => {
-        L.geoJSON(data, {
-          style: {
-            color: "white",       // border color
-            weight: 1,            // border thickness
-            fillColor: "#111111", // dark gray countries
-            fillOpacity: 1
-          }
-        }).addTo(map);
-      });
-  </script>
+  <!-- Your app -->
+  <script src="script.js"></script>
 </body>
 </html>
