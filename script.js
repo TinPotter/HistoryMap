@@ -1,13 +1,40 @@
-// Create the map inside the “map” div, centered somewhere
-var map = L.map('map').setView([0, 0], 2);  
-// (lat, lng), zoom = 2 (world view)
+// Initialize the map
+var map = L.map('map', {
+  center: [20, 0],
+  zoom: 2,
+  scrollWheelZoom: true,
+  timeDimension: true,
+  timeDimensionControl: true
+});
 
-// Use a tile server — OpenStreetMap standard tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-}).addTo(map);
+// Utility: random color generator
+function getRandomColor() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
 
-// Add a draggable marker to test
-var marker = L.marker([0, 0], { draggable: true }).addTo(map);
-marker.bindPopup("Here’s a marker. Drag me!").openPopup();
+// Load GeoJSON (modern borders as placeholder)
+fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+  .then(res => res.json())
+  .then(data => {
+    // Create a Leaflet layer for countries
+    var countryLayer = L.geoJSON(data, {
+      style: feature => ({
+        color: "white",         // border
+        weight: 1,
+        fillColor: getRandomColor(),
+        fillOpacity: 1
+      }),
+      onEachFeature: (feature, layer) => {
+        layer.bindTooltip(feature.properties.name);
+      }
+    });
+
+    // Wrap with TimeDimension (currently just loops modern map)
+    var tdLayer = L.timeDimension.layer.geoJson(countryLayer, {
+      updateTimeDimension: true,
+      addlastPoint: false,
+      duration: 'P1Y'
+    });
+
+    tdLayer.addTo(map);
+  });
