@@ -1,16 +1,11 @@
-/* style.css */
+/* Reset body margin so map fills screen */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
-  background: #f0f0f0;
 }
 
-h1 {
-  margin: 10px 0;
-}
-
+/* VERY important: give the map a height */
 #map {
-  height: 90vh; /* take almost full screen */
+  height: 100vh; /* full screen */
   width: 100%;
 }
