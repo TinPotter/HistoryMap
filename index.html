@@ -23,16 +23,17 @@
 <body>
   <div id="map"></div>
 
-  <!-- Leaflet JS -->
+  <!-- Leaflet core -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Leaflet TimeDimension JS -->
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.min.js"></script>
-
-  <!-- ISO8601 library for TimeDimension -->
+  <!-- ISO8601 library (must be BEFORE TimeDimension) -->
   <script src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.3/iso8601.min.js"></script>
+
+  <!-- Leaflet TimeDimension -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.min.js"></script>
 
   <!-- Your script -->
   <script src="script.js"></script>
+
 </body>
 </html>
