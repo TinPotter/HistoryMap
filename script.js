@@ -1,13 +1,13 @@
-// Create a map centered on Paris
-var map = L.map('map').setView([48.8566, 2.3522], 5);
+// Create the map inside the “map” div, centered somewhere
+var map = L.map('map').setView([0, 0], 2);  
+// (lat, lng), zoom = 2 (world view)
 
-// Dark Matter tiles from Carto
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  subdomains: 'abcd',
-  maxZoom: 19
+// Use a tile server — OpenStreetMap standard tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Add a draggable marker
-var marker = L.marker([48.8566, 2.3522], { draggable: true }).addTo(map);
-marker.bindPopup("Drag me!").openPopup();
+// Add a draggable marker to test
+var marker = L.marker([0, 0], { draggable: true }).addTo(map);
+marker.bindPopup("Here’s a marker. Drag me!").openPopup();
