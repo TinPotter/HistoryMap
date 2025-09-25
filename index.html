@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Map Example</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Leaflet CSS from CDN -->
+  <meta charset="UTF-8">
+  <title>Draggable Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   />
+  <style>
+    /* Make sure map fills the entire screen */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
   <div id="map"></div>
 
-  <!-- Leaflet JS from CDN -->
+  <!-- Leaflet JS -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
-  <script src="script.js"></script>
+  <script>
+    // Initialize map, center on Europe
+    var map = L.map('map', {
+      center: [48.8566, 2.3522], // Paris
+      zoom: 5,
+      scrollWheelZoom: true // enable zoom with mouse wheel
+    });
+
+    // Online OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors'
+    }).addTo(map);
+
+    // Add a draggable marker
+    var marker = L.marker([48.8566, 2.3522], {draggable: true}).addTo(map);
+    marker.bindPopup("Drag me around!<br>Use your mouse wheel to zoom").openPopup();
+  </script>
 </body>
 </html>
