@@ -12,14 +12,16 @@ function getRandomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-// Load GeoJSON (modern borders as placeholder)
+// Load countries (modern borders for now)
 fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("GeoJSON fetch failed");
+    return res.json();
+  })
   .then(data => {
-    // Create a Leaflet layer for countries
     var countryLayer = L.geoJSON(data, {
-      style: feature => ({
-        color: "white",         // border
+      style: () => ({
+        color: "white",
         weight: 1,
         fillColor: getRandomColor(),
         fillOpacity: 1
@@ -29,12 +31,7 @@ fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.g
       }
     });
 
-    // Wrap with TimeDimension (currently just loops modern map)
-    var tdLayer = L.timeDimension.layer.geoJson(countryLayer, {
-      updateTimeDimension: true,
-      addlastPoint: false,
-      duration: 'P1Y'
-    });
-
-    tdLayer.addTo(map);
-  });
+    // Just add directly (ignore timeline for now)
+    countryLayer.addTo(map);
+  })
+  .catch(err => console.error("Error loading GeoJSON:", err));
