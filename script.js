@@ -7,13 +7,13 @@ var map = L.map('map', {
   timeDimensionControl: true
 });
 
-// Utility: random color generator
+// Random color generator for countries
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-// Load countries (modern borders for now)
-fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+// Load countries GeoJSON (modern borders)
+fetch("countries.geo.json") // or GitHub raw URL if not local
   .then(res => {
     if (!res.ok) throw new Error("GeoJSON fetch failed");
     return res.json();
@@ -21,7 +21,7 @@ fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.g
   .then(data => {
     var countryLayer = L.geoJSON(data, {
       style: () => ({
-        color: "white",
+        color: "white",          // border color
         weight: 1,
         fillColor: getRandomColor(),
         fillOpacity: 1
@@ -31,7 +31,13 @@ fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.g
       }
     });
 
-    // Just add directly (ignore timeline for now)
-    countryLayer.addTo(map);
+    // Wrap in TimeDimension (slider works, placeholder for timeline)
+    var tdLayer = L.timeDimension.layer.geoJson(countryLayer, {
+      updateTimeDimension: true,
+      addlastPoint: false,
+      duration: 'P1Y'
+    });
+
+    tdLayer.addTo(map);
   })
   .catch(err => console.error("Error loading GeoJSON:", err));
