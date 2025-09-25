@@ -1,11 +1,11 @@
-/* Reset body margin so map fills screen */
-body {
+/* remove default margins so map fills full viewport */
+body, html {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  height: 100%;
 }
 
-/* VERY important: give the map a height */
 #map {
-  height: 100vh; /* full screen */
   width: 100%;
+  height: 100%;
 }
